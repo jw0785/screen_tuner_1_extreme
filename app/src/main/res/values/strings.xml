@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Screen Tuner 1X</string>
+    <string name="screen_tuner">Screen Tuner</string>
+    <string name="brightness">Brightness</string>
+    <string name="color_temperature">Color Temperature</string>
+    <string name="daytime">Daytime</string>
+    <string name="sunset_evening">Sunset / Evening</string>
+    <string name="bedtime">Bedtime</string>
+    <string name="wake_time">Wake Time</string>
+    <string name="use_location">Use location for sunrise/sunset</string>
+    <string name="warning_conflict">Night Light and/or Extra Dim are enabled. These fight with Screen Tuner for the same display path. Disable them in Settings before continuing.</string>
+    <string name="open_display_settings">Open Display Settings</string>
+    <string name="about_title">Screen Tuner 1X</string>
+    <string name="about_full_name">Android Screen Tuner 1 Extreme</string>
+    <string name="notification_channel_name">Screen Tuner</string>
+    <string name="notification_channel_description">Shows current color temperature and brightness</string>
+    <string name="error_no_root">Root access required. Install Magisk or similar.</string>
+    <string name="error_no_surfaceflinger">SurfaceFlinger color transform not available on this device.</string>
+</resources>
