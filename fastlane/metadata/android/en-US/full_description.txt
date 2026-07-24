@@ -1,0 +1,5 @@
+Screen Tuner 1X combines features presented in Android's native Night Light, Extra Dim and <a href="https://justgetflux.com/">f.lux</a> inspired adaptive color temperature adjustment.
+
+Root required.
+
+Disable all other features and apps that interacts with SurfaceFlinger color transform matrix like aforementioned.

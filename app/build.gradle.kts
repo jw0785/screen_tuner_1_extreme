@@ -12,18 +12,18 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
 
-    signingConfigs {
-        named("debug") {
-            storeFile = file(System.getProperty("user.home") + "/.android/debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
-        }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
     }
 
+    // sign separately with ephemeral keys
+    // wait. isn't trust already solved by reproducible builds and hash?
+    // but i guess Android PackageManager demands it for reasons
+    // no use to overthink about this
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -31,7 +31,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
