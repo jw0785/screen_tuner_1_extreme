@@ -18,7 +18,10 @@ jobs:
           distribution: temurin
           java-version: 17
       - run: chmod +x gradlew
-      - run: ./gradlew assembleRelease
+      - run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          CODE=$(echo "$TAG" | tr -d '.')
+          ./gradlew assembleRelease -PversionName="$TAG" -PversionCode="$CODE"
       - run: |
           echo "${{ secrets.SIGNING_KEY_BASE64 }}" | base64 -d > /dev/shm/release.pk8
           echo "${{ secrets.SIGNING_CERT }}" > /dev/shm/release.pem

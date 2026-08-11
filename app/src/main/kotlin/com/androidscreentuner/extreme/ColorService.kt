@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.provider.Settings
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
@@ -110,7 +111,8 @@ class ColorService : Service() {
 
         val currentK = ScheduleCalculator.tick(currentMinutes, daytimeK, sunsetK, bedtimeK)
 
-        val matrix = ColorMath.buildMatrix(currentK, dimFactor)
+        val colorSpace = if (isWideGamutMode()) ColorMath.DISPLAY_P3 else ColorMath.SRGB
+        val matrix = ColorMath.buildMatrix(currentK, dimFactor, colorSpace)
         SurfaceFlingerManager.applyMatrix(matrix)
 
         val dimPercent = (dimFactor * 100).toInt()
@@ -127,6 +129,15 @@ class ColorService : Service() {
             }
         }
         return (wakeMinutes + 720) % 1440
+    }
+
+    private fun isWideGamutMode(): Boolean {
+        val mode = try {
+            Settings.System.getInt(contentResolver, "display_color_mode")
+        } catch (_: Settings.SettingNotFoundException) {
+            0
+        }
+        return mode >= 2
     }
 
     private fun createNotificationChannel() {
