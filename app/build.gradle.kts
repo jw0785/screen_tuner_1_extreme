@@ -12,8 +12,8 @@ android {
         minSdk = 26
         targetSdk = 34
         // see ./deploy.sh
-        versionCode = 110
-        versionName = "1.1.0"
+        versionCode = 10101
+        versionName = "1.1.1"
     }
 
     dependenciesInfo {

@@ -1,0 +1,2 @@
+feat: add icon
+chore: change version locally
