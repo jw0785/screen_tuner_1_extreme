@@ -11,8 +11,9 @@ android {
         applicationId = "com.androidscreentuner.extreme"
         minSdk = 26
         targetSdk = 34
-        versionCode = (findProperty("versionCode") as String?)?.toInt() ?: 1
-        versionName = (findProperty("versionName") as String?) ?: "1.1.0"
+        // see ./deploy.sh
+        versionCode = 110
+        versionName = "1.1.0"
     }
 
     dependenciesInfo {

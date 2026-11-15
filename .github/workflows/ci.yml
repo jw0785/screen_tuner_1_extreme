@@ -18,10 +18,7 @@ jobs:
           distribution: temurin
           java-version: 17
       - run: chmod +x gradlew
-      - run: |
-          TAG="${GITHUB_REF_NAME#v}"
-          CODE=$(echo "$TAG" | tr -d '.')
-          ./gradlew assembleRelease -PversionName="$TAG" -PversionCode="$CODE"
+      - run: ./gradlew assembleRelease
       - run: |
           echo "${{ secrets.SIGNING_KEY_BASE64 }}" | base64 -d > /dev/shm/release.pk8
           echo "${{ secrets.SIGNING_CERT }}" > /dev/shm/release.pem
@@ -32,6 +29,8 @@ jobs:
           shred -u /dev/shm/release.pk8 /dev/shm/release.pem
           mv app/build/outputs/apk/release/app-release-unsigned.apk \
             app/build/outputs/apk/release/screen-tuner-1x-${{ github.ref_name }}.apk
+      - run: echo "VERSION_CODE=$(sed -nE 's/^\s*versionCode\s*=\s*([0-9]+).*/\1/p' app/build.gradle.kts)" >> "$GITHUB_ENV"
       - uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
         with:
           files: app/build/outputs/apk/release/screen-tuner-1x-${{ github.ref_name }}.apk
+          body_path: fastlane/metadata/android/en-US/changelogs/${{ env.VERSION_CODE }}.txt
